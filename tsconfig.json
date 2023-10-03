@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+
+  "extends": "@tsconfig/node18/tsconfig.json",
+
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "composite": true
+  },
+
+  "ts-node": {
+      "esm": true
+  }
+}
