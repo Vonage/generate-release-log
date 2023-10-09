@@ -3,7 +3,7 @@ export default [
   {
     label: 'standard github release to markdown',
     pkgName: 'My SDK',
-    release: JSON.parse(JSON.stringify({
+    githubRelease: JSON.parse(JSON.stringify({
       url: "https://api.github.com/repos/alice.bob/release-testing/releases/123456789011",
       assets_url: "https://api.github.com/repos/alice.bob/release-testing/releases/123456789011/assets",
       upload_url: "https://uploads.github.com/repos/alice.bob/release-testing/releases/123456789011/assets{?name,label}",
@@ -55,11 +55,13 @@ export default [
 * fix: failed to reticulate splines @bob in https://github.com/example-org/example-repo/pull/42
 
 **Full Changelog**: https://github.com/example-org/example-repo/compare/0.0.0...1.0.0`,
+    expectedVersion: '1.0.0',
+    expectedReleaseDate: "2023-10-01"
   },
   {
     label: 'to releaselog and adjusts the order',
     pkgName: 'My SDK',
-    release: JSON.parse(JSON.stringify({
+    githubRelease: JSON.parse(JSON.stringify({
       url: "https://api.github.com/repos/alice.bob/release-testing/releases/123456789011",
       assets_url: "https://api.github.com/repos/alice.bob/release-testing/releases/123456789011/assets",
       upload_url: "https://uploads.github.com/repos/alice.bob/release-testing/releases/123456789011/assets{?name,label}",
@@ -144,13 +146,14 @@ export default [
 
 ### Deprecated
 
-* Call to kernal
-`,
+* Call to kernal`,
+    expectedVersion: '1.0.0',
+    expectedReleaseDate: "1997-08-29"
   },
   {
     label: 'a non standard release by leaving it alone',
     pkgName: 'My SDK',
-    release: JSON.parse(JSON.stringify({
+    githubRelease: JSON.parse(JSON.stringify({
       url: "https://api.github.com/repos/alice.bob/release-testing/releases/123456789011",
       assets_url: "https://api.github.com/repos/alice.bob/release-testing/releases/123456789011/assets",
       upload_url: "https://uploads.github.com/repos/alice.bob/release-testing/releases/123456789011/assets{?name,label}",
@@ -187,7 +190,7 @@ export default [
       assets: [],
       tarball_url: null,
       zipball_url: null,
-      body: `I am error 
+      body: `I am error
 
 I am a change log that is not standard.`,
       mentions_count: 1
@@ -197,6 +200,7 @@ I am a change log that is not standard.`,
 I am error
 
 I am a change log that is not standard.`,
+    expectedVersion: '1.0.0',
+    expectedReleaseDate: "1997-08-29"
   }
-
 ];
