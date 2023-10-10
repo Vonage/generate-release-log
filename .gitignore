@@ -46,6 +46,3 @@ node_modules/
 ### Vonage ###
 .vonagerc
 vonage_app.json
-
-
-dist

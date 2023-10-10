@@ -1,0 +1,12 @@
+---
+name: Generate release log
+description: Prepends a release to a release log following "Keep a Changelog"
+inputs:
+  release-file:
+    description: "Name of the release file"
+    required: false
+    default: "RELEASES.md"
+
+runs:
+  using: node20
+  main: dist/index.js

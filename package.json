@@ -12,7 +12,11 @@
     "lint:fix": "eslint . --fix",
     "prepare": "is-ci || husky install",
     "test": "jest",
+    "package": "ncc build lib/index.ts --license licenses.txt",
     "test:watch": "jest --watch"
+  },
+  "exports": {
+    ".": "./dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +34,7 @@
     "@actions/github": "5.1.1",
     "@jest/types": "29.6.3",
     "@tsconfig/node18": "18.2.2",
+    "@tsconfig/node20": "20.1.2",
     "@types/jest": "29.5.5",
     "@types/mock-fs": "4.13.2",
     "@types/node": "20.8.0",

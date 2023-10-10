@@ -7,9 +7,11 @@ import { Release } from './classes/release';
 import * as fs from 'fs';
 
 export async function run(): Promise<void> {
+  core.info('Updating relase');
   try {
     const releaseFile: string = core.getInput('release-file')
-      || resolve(process.cwd(), 'RELEASES.md');
+      || resolve(process.cwd(), './RELEASES.md');
+
     core.debug(`Reading file ${releaseFile}`);
 
     const markdown = await parseReleaseLog(releaseFile);
@@ -18,9 +20,9 @@ export async function run(): Promise<void> {
     const release = Release.fromGithubRelease(githubRelease);
 
     markdown.addRelease(release);
+    core.debug(`Release: ${release.toString()}`);
     core.debug(`Writing file ${releaseFile}`);
     fs.writeFileSync(releaseFile, markdown.toString());
-
   } catch (error) {
     if (error instanceof Error) {core.setFailed(error.message);}
   }
