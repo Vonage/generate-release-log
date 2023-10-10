@@ -29,9 +29,9 @@ export const releaseEvent: ReleaseEvent = {
       site_admin: false
     },
     node_id: "RE_kwDOJe08xM4HWkAL",
-    tag_name: "3.9.3",
+    tag_name: "1.0.0",
     target_commitish: "main",
-    name: "1.0.4",
+    name: "1.0.0",
     draft: true,
     prerelease: false,
     created_at: "2023-10-01T14:21:07Z",
@@ -39,7 +39,28 @@ export const releaseEvent: ReleaseEvent = {
     assets: [],
     tarball_url: null,
     zipball_url: null,
-    body: "The 3.9.3 release of the Node server SDK includes significant updates such as the addition of incoming signature verification for SMS, the inclusion of verifySignature in the JWT package, and file download functionality. Additionally, it addresses issues by fixing response types on file downloads.\r\n\r\n### Whats New\r\n- Incoming signature verification in SMS feature ([#861](https://github.com/Vonage/vonage-node-sdk/pull/861))\r\n- `verifySignature` to JWT package ([#860](https://github.com/Vonage/vonage-node-sdk/pull/860))\r\n- File download functionality ([#858](https://github.com/Vonage/vonage-node-sdk/pull/858))\r\n\r\n### Fixed\r\n- Response types on file downloads in voice feature ([#864](https://github.com/Vonage/vonage-node-sdk/pull/864))\r\n\r\n### New Contributors\r\n- eimers made their first contribution in https://github.com/Vonage/vonage-php-sdk-core/pull/421",
+    body: `## Vonage My SDK v1.0.0 (2023-11-01)
+
+### Changed
+* Planks constant to a lower value
+
+### Deprecated
+* Call to kernal 
+
+### Fixes 
+* Ctrl Key no longer overheats CPU
+
+### Removed
+* The need for speed
+
+### Added
+* New feature to reticulate splines
+
+### Security
+* Key Card now requrired for entry
+
+
+`,
     mentions_count: 2
   },
   repository: {

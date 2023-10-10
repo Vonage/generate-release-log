@@ -69,9 +69,11 @@ export class Section {
     this._lines.push(newLine);
   }
 
+  getLines(): Array<string> {
+    return cleanLines(this.lines)
+  }
 
   toString(): string {
-
-    return this.lines.join('\n');
+    return this.getLines().join('\n');
   }
 }

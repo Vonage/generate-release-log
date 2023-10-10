@@ -60,7 +60,7 @@ export class Markdown  {
     )
   }
 
-  toString(): string {
+  getLines(): Array<string> {
     if (this.latestRelease) {
       this.latestRelease.releaseDate = this.latestRelease.releaseDate || format(new Date(), 'yyyy-MM-dd');
       this.frontManner.version = this.latestRelease.version as string;
@@ -78,7 +78,7 @@ export class Markdown  {
       releaseLines.push(release.toString().split('\n'))
     }
 
-    const markdownLines = cleanLines([
+    return cleanLines([
       '---',
       ...yaml.dump(this.frontManner).split('\n').slice(0, -1),
       '---',
@@ -93,7 +93,9 @@ export class Markdown  {
         ]
       ).flat(),
     ]);
+  }
 
-    return markdownLines.join('\n');
+  toString(): string {
+    return this.getLines().join('\n');
   }
 }

@@ -1,20 +1,26 @@
 import * as core from '@actions/core'
+import * as github from '@actions/github';
+import { ReleaseEvent } from '@octokit/webhooks-types';
+import { parseReleaseLog } from './parseReleaseLog';
+import { resolve } from 'path';
+import { Release } from './classes/release';
+import * as fs from 'fs';
 
 export async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
+    const releaseFile: string = core.getInput('release-file') || resolve(process.cwd(), 'RELEASES.md');
+    core.debug(`Reading file ${releaseFile}`);
 
-    // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-    core.debug(`Waiting ${ms} milliseconds ...`)
+    const markdown = await parseReleaseLog(releaseFile);
 
-    // Log the current timestamp, wait, then log the new timestamp
-    core.debug(new Date().toTimeString())
-    core.debug(new Date().toTimeString())
+    const { release: githubRelease } = github.context.payload as ReleaseEvent
+    const release = Release.fromGithubRelease(githubRelease);
 
-    // Set outputs for other workflow steps to use
-    core.setOutput('time', new Date().toTimeString())
+    markdown.addRelease(release);
+    core.debug(`Writing file ${releaseFile}`);
+    fs.writeFileSync(releaseFile, markdown.toString())
+
   } catch (error) {
-    // Fail the workflow run if an error occurs
     if (error instanceof Error) core.setFailed(error.message)
   }
 }

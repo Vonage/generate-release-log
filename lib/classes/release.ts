@@ -114,7 +114,7 @@ export class Release  {
     this.lines.push(line);
   }
 
-  toString(): string {
+  getLines(): Array<string> {
     const sections = [] as Section[];
     let lastSection = SectionType.PREAMBLE;
 
@@ -136,7 +136,11 @@ export class Release  {
     return cleanLines([
       this.releaseTitle,
       '',
-      ...sections.map((section) => [...section.lines, '']),
-    ].flat()).join('\n').trimRight();
+      ...sections.map(({lines}) => [...lines, '']),
+    ].flat());
+  }
+
+  toString(): string {
+    return this.getLines().join('\n').trimRight();
   }
 }

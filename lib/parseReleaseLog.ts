@@ -71,6 +71,7 @@ export const parseReleaseLog = async (file: string): Promise<Markdown>  => {
     section.push(line);
   }
 
+  rl.close();
   if (section.length > 0) {
     markdown.addRelease(Release.fromMarkdownRelease(section.join('\n')));
   }
