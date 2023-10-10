@@ -8,7 +8,10 @@ import { cleanLines } from '../cleanLines';
 const releaseRegex = /(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))? ?\(?([0-9-]*)?\)?/;
 const newLineRegext =/\r?\n|\r|\n/g;
 
-const getSection = (sections: Set<Section>, which: SectionType): Section | undefined => {
+const getSection = (
+  sections: Set<Section>,
+  which: SectionType,
+): Section | undefined => {
   for (const section of sections.values()) {
     if (section.type === which) {
       return section;
@@ -31,7 +34,7 @@ export class Release  {
     let m;
     while ((m = releaseRegex.exec(line)) !== null) {
       if (m.index === releaseRegex.lastIndex) {
-          releaseRegex.lastIndex++;
+        releaseRegex.lastIndex++;
       }
 
       const releaseDate = m[6];
@@ -51,8 +54,11 @@ export class Release  {
     const release = Release.fromMarkdownRelease(gitHubRelease.body, pkgName);
     release.version = gitHubRelease.tag_name.replaceAll('v', '');
     release.releaseDate = format(
-      Date.parse(gitHubRelease.published_at || gitHubRelease.created_at as string),
-      'yyyy-MM-dd'
+      Date.parse(
+        gitHubRelease.published_at
+          || gitHubRelease.created_at as string,
+      ),
+      'yyyy-MM-dd',
     );
 
     return release;
@@ -60,7 +66,7 @@ export class Release  {
 
   static fromMarkdownRelease(
     markdown: string,
-    pkgName: string = ''
+    pkgName: string = '',
   ) {
     const releaseLines = markdown.split(newLineRegext);
     const release = new Release(pkgName);
@@ -72,7 +78,7 @@ export class Release  {
   }
 
   constructor(pkgName: string = '') {
-    this.sections = new Set([new Section(SectionType.PREAMBLE)])
+    this.sections = new Set([new Section(SectionType.PREAMBLE)]);
     this.lines = [];
     this.version = null;
     this.releaseDate = null;
@@ -82,7 +88,7 @@ export class Release  {
   get releaseTitle(): string {
     const parts: string[] = [
       '## Vonage',
-    ]
+    ];
 
     if (this.pkgName) {
       parts.push(this.pkgName);
@@ -120,23 +126,27 @@ export class Release  {
 
     for (const line of this.lines) {
       lastSection = Section.parseHeader(line) || lastSection;
-      const currentSection = getSection(this.sections, lastSection) || new Section(lastSection)
-      currentSection.addLine(line)
+      const currentSection = getSection(
+        this.sections,
+        lastSection,
+      ) || new Section(lastSection);
+      currentSection.addLine(line);
       this.sections.add(currentSection);
     }
 
     for(const section of this.sections.values()) {
-      sections.push(section)
+      sections.push(section);
     }
 
-    sections.sort(
-      (sectionOne: Section, sectionTwo: Section) => SectionOrder[sectionOne.type] - SectionOrder[sectionTwo.type]
-    )
+    sections.sort((
+      sectionOne: Section,
+      sectionTwo: Section,
+    ) => SectionOrder[sectionOne.type] - SectionOrder[sectionTwo.type]);
 
     return cleanLines([
       this.releaseTitle,
       '',
-      ...sections.map(({lines}) => [...lines, '']),
+      ...sections.map(({ lines }) => [...lines, '']),
     ].flat());
   }
 

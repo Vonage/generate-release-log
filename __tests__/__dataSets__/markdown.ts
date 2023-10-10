@@ -50,6 +50,6 @@ export default [
 
 * Call to kernal`,
     expectedReleaseDate: "1997-08-29",
-    expectedVersion: "1.0.0"
+    expectedVersion: "1.0.0",
   },
 ];

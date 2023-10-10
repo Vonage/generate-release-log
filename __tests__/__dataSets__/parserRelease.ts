@@ -1,4 +1,4 @@
-import {format} from 'date-fns';
+import { format } from 'date-fns';
 const now = new Date();
 
 export default [
@@ -59,7 +59,7 @@ Soft GA
 
 ## Vonage My SDK v0.0.0 (1976-04-11)
 
-Soft GA`
+Soft GA`,
   },
   {
     label: 'markdown and uses current date for release',
@@ -88,13 +88,13 @@ This patch adds some missing functionality
 
 ### Added
 
-* stuff`
+* stuff`,
   },
   {
     label: 'funky markdown',
     file: `${__dirname}/funkyMarkdown.md`,
 
-expected: `---
+    expected: `---
 gitUrl: https://github.com/example/example
 icon: my-icon
 id: my-sdk
@@ -144,7 +144,7 @@ Soft GA
 
 ## Vonage My SDK v0.0.0
 
-Soft GA`
+Soft GA`,
   },
   {
     label: 'empty markdown',
@@ -158,6 +158,6 @@ metaTitle: My SDK
 pkgName: My SDK
 title: my-sdk
 version: 5.0.0
----`
-  }
-]
+---`,
+  },
+];

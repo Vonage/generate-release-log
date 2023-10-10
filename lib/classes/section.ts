@@ -2,7 +2,7 @@ import { SectionType } from '../enums/sectionType';
 import { cleanLines } from '../cleanLines';
 import { SectionTitle } from '../enums/sectionTitle';
 
-const headerRegex = /#|'|"/g
+const headerRegex = /#|'|"/g;
 
 export class Section {
   type: SectionType;
@@ -19,8 +19,8 @@ export class Section {
       this._lines = [
         this._lines[0],
         '',
-        ...this._lines.splice(1)
-      ]
+        ...this._lines.splice(1),
+      ];
     }
 
     return this._lines;
@@ -29,28 +29,28 @@ export class Section {
   static parseHeader(line: string): SectionType | undefined {
     const noHeader = `${line}`.replaceAll(headerRegex, '').trim().toUpperCase();
     switch(noHeader) {
-      // This is the default from github
-      case 'WHATS NEW':
-      case 'WHATS CHANGED':
-      case SectionType.ADDED:
-        return SectionType.ADDED;
-      case SectionType.CHANGED:
-        return SectionType.CHANGED;
+    // This is the default from github
+    case 'WHATS NEW':
+    case 'WHATS CHANGED':
+    case SectionType.ADDED:
+      return SectionType.ADDED;
+    case SectionType.CHANGED:
+      return SectionType.CHANGED;
       // This is added from github
-      case 'NEW CONTRIBUTORS':
-      case SectionType.CONTRIBUTOR:
-        return SectionType.CONTRIBUTOR;
-      case SectionType.DEPRECATED:
-        return SectionType.DEPRECATED;
-      case 'FIXES':
-      case SectionType.FIXED:
-        return SectionType.FIXED;
-      case SectionType.PREAMBLE:
-        return SectionType.PREAMBLE;
-      case SectionType.REMOVED:
-        return SectionType.REMOVED;
-      case SectionType.SECURITY:
-        return SectionType.SECURITY;
+    case 'NEW CONTRIBUTORS':
+    case SectionType.CONTRIBUTOR:
+      return SectionType.CONTRIBUTOR;
+    case SectionType.DEPRECATED:
+      return SectionType.DEPRECATED;
+    case 'FIXES':
+    case SectionType.FIXED:
+      return SectionType.FIXED;
+    case SectionType.PREAMBLE:
+      return SectionType.PREAMBLE;
+    case SectionType.REMOVED:
+      return SectionType.REMOVED;
+    case SectionType.SECURITY:
+      return SectionType.SECURITY;
     }
 
     if (noHeader.startsWith('**FULL CHANGELOG**')) {
@@ -60,17 +60,17 @@ export class Section {
 
   addLine(line: string): void {
     const firstWord = line.split(' ')[0];
-    let newLine = line
+    let newLine = line;
 
     if (firstWord.startsWith('#')) {
-      newLine = SectionTitle[this.type];
+      newLine = SectionTitle[this.type].trim() || '';
     }
 
     this._lines.push(newLine);
   }
 
   getLines(): Array<string> {
-    return cleanLines(this.lines)
+    return cleanLines(this.lines);
   }
 
   toString(): string {

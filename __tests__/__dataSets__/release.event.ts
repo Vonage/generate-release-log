@@ -26,7 +26,7 @@ export const releaseEvent: ReleaseEvent = {
       events_url: "https://api.github.com/users/alice.bob/events{/privacy}",
       received_events_url: "https://api.github.com/users/alice.bob/received_events",
       type: "User",
-      site_admin: false
+      site_admin: false,
     },
     node_id: "RE_kwDOJe08xM4HWkAL",
     tag_name: "1.0.0",
@@ -61,7 +61,7 @@ export const releaseEvent: ReleaseEvent = {
 
 
 `,
-    mentions_count: 2
+    mentions_count: 2,
   },
   repository: {
     id: 1234567890,
@@ -87,7 +87,7 @@ export const releaseEvent: ReleaseEvent = {
       events_url: "https://api.github.com/users/alice.bob/events{/privacy}",
       received_events_url: "https://api.github.com/users/alice.bob/received_events",
       type: "User",
-      site_admin: false
+      site_admin: false,
     },
     html_url: "https://github.com/alice.bob/release-testing",
     description: null,
@@ -161,7 +161,7 @@ export const releaseEvent: ReleaseEvent = {
     forks: 0,
     open_issues: 0,
     watchers: 0,
-    default_branch: "main"
+    default_branch: "main",
   },
   sender: {
     login: "alice.bob",
@@ -181,6 +181,6 @@ export const releaseEvent: ReleaseEvent = {
     events_url: "https://api.github.com/users/alice.bob/events{/privacy}",
     received_events_url: "https://api.github.com/users/alice.bob/received_events",
     type: "User",
-    site_admin: false
-  }
-}
+    site_admin: false,
+  },
+};

@@ -1,11 +1,11 @@
-import {SectionType } from '../../lib/enums/sectionType';
+import { SectionType } from '../../lib/enums/sectionType';
 
 export default [
   {
     label: 'outputs empty section',
     lines: [],
     type: SectionType.PREAMBLE,
-    expected: ``
+    expected: ``,
   },
   {
     label: 'outputs section',
@@ -65,4 +65,4 @@ export default [
   },
 
 
-]
+];

@@ -16,8 +16,8 @@ export const parseReleaseLog = async (file: string): Promise<Markdown>  => {
   const fileStream = createReadStream(file);
   const rl = readline.createInterface({
     input: fileStream,
-    crlfDelay: Infinity
-  })
+    crlfDelay: Infinity,
+  });
 
   const frontMannerLines: string[] = [];
 
@@ -35,8 +35,13 @@ export const parseReleaseLog = async (file: string): Promise<Markdown>  => {
       continue;
     }
 
-    if (!frontMannerDone && !foundFrontEnd && foundFrontStart && line === '---') {
-      foundFrontEnd = true
+    if (
+      !frontMannerDone
+        && !foundFrontEnd 
+        && foundFrontStart 
+        && line === '---'
+    ) {
+      foundFrontEnd = true;
       frontMannerDone = true; 
       continue;
     }
@@ -84,4 +89,4 @@ export const parseReleaseLog = async (file: string): Promise<Markdown>  => {
   markdown.frontManner = frontManner as ReleaseFrontManner;
 
   return markdown;
-}
+};

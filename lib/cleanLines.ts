@@ -29,5 +29,5 @@ export const cleanLines = (lines: string[]): string [] => {
   }
 
   return cleanedLines;
-}
+};
 

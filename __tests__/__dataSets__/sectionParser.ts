@@ -21,4 +21,4 @@ export default [
     line: '### What\'s Changed',
     expected: SectionType.ADDED,
   },
-]
+];

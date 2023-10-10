@@ -1,39 +1,39 @@
-import * as core from '@actions/core'
-import * as github from '@actions/github'
-import * as main from '../lib/main'
+import * as core from '@actions/core';
+import * as github from '@actions/github';
+import * as main from '../lib/main';
 import { releaseEvent } from './__dataSets__/release.event';
 import { resolve } from 'path';
 import mockFs from 'mock-fs';
 import { readFileSync } from 'fs';
 
-const getInputMock = jest.spyOn(core, 'getInput')
-const runMock = jest.spyOn(main, 'run')
+const getInputMock = jest.spyOn(core, 'getInput');
+const runMock = jest.spyOn(main, 'run');
 
 describe('action', () => {
   beforeEach(() => {
     mockFs({
-      'RELEASES.md': mockFs.load(resolve(__dirname, '__dataSets__/empty.md'))
+      'RELEASES.md': mockFs.load(resolve(__dirname, '__dataSets__/empty.md')),
     });
-    jest.clearAllMocks()
-  })
+    jest.clearAllMocks();
+  });
 
   afterEach(() => {
     mockFs.restore();
-  })
+  });
 
   test('Adds github release', async () => {
     const releaseFile =resolve(process.cwd(), 'RELEASES.md'); 
     getInputMock.mockImplementation((name: string): string => {
       switch (name) {
-        default:
-          return ''
+      default:
+        return '';
       }
-    })
+    });
 
-    github.context.payload = releaseEvent 
+    github.context.payload = releaseEvent; 
 
-    await main.run()
-    expect(runMock).toHaveReturned()
+    await main.run();
+    expect(runMock).toHaveReturned();
     expect(readFileSync(releaseFile, 'utf-8')).toBe(`---
 gitUrl: https://github.com/example/example
 icon: my-icon
@@ -73,5 +73,5 @@ release: '2023-10-01'
 ### Deprecated
 
 * Call to kernal`);
-  })
-})
+  });
+});

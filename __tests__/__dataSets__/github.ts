@@ -27,7 +27,7 @@ export default [
         events_url: "https://api.github.com/users/alice.bob/events{/privacy}",
         received_events_url: "https://api.github.com/users/alice.bob/received_events",
         type: "User",
-        site_admin: false
+        site_admin: false,
       },
       node_id: "RE_kwDOJe08xM4HWkAL",
       tag_name: "1.0.0",
@@ -46,7 +46,7 @@ export default [
 
 
 **Full Changelog**: https://github.com/example-org/example-repo/compare/0.0.0...1.0.0`,
-      mentions_count: 1
+      mentions_count: 1,
     })) as Release,
     expected: `## Vonage My SDK v1.0.0 (2023-10-01)
 
@@ -56,7 +56,7 @@ export default [
 
 **Full Changelog**: https://github.com/example-org/example-repo/compare/0.0.0...1.0.0`,
     expectedVersion: '1.0.0',
-    expectedReleaseDate: "2023-10-01"
+    expectedReleaseDate: "2023-10-01",
   },
   {
     label: 'to releaselog and adjusts the order',
@@ -85,7 +85,7 @@ export default [
         events_url: "https://api.github.com/users/alice.bob/events{/privacy}",
         received_events_url: "https://api.github.com/users/alice.bob/received_events",
         type: "User",
-        site_admin: false
+        site_admin: false,
       },
       node_id: "RE_kwDOJe08xM4HWkAL",
       tag_name: "1.0.0",
@@ -120,7 +120,7 @@ export default [
 
 
 `,
-      mentions_count: 1
+      mentions_count: 1,
     })) as Release,
     expected: `## Vonage My SDK v1.0.0 (1997-08-29)
 
@@ -148,7 +148,7 @@ export default [
 
 * Call to kernal`,
     expectedVersion: '1.0.0',
-    expectedReleaseDate: "1997-08-29"
+    expectedReleaseDate: "1997-08-29",
   },
   {
     label: 'a non standard release by leaving it alone',
@@ -177,7 +177,7 @@ export default [
         events_url: "https://api.github.com/users/alice.bob/events{/privacy}",
         received_events_url: "https://api.github.com/users/alice.bob/received_events",
         type: "User",
-        site_admin: false
+        site_admin: false,
       },
       node_id: "RE_kwDOJe08xM4HWkAL",
       tag_name: "1.0.0",
@@ -193,7 +193,7 @@ export default [
       body: `I am error
 
 I am a change log that is not standard.`,
-      mentions_count: 1
+      mentions_count: 1,
     })) as Release,
     expected: `## Vonage My SDK v1.0.0 (1997-08-29)
 
@@ -201,6 +201,6 @@ I am error
 
 I am a change log that is not standard.`,
     expectedVersion: '1.0.0',
-    expectedReleaseDate: "1997-08-29"
-  }
+    expectedReleaseDate: "1997-08-29",
+  },
 ];

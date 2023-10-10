@@ -8,10 +8,10 @@ import { format } from 'date-fns';
 export class Markdown  {
   public frontManner: ReleaseFrontManner;
 
-  protected _nonRelease: Array<string>
-  protected _releaseCount: number
-  protected _releases: Set<Release>
-  protected _sortedReleases: Array<string>
+  protected _nonRelease: Array<string>;
+  protected _releaseCount: number;
+  protected _releases: Set<Release>;
+  protected _sortedReleases: Array<string>;
 
   constructor() {
     this.frontManner = {};
@@ -56,26 +56,27 @@ export class Markdown  {
     this._releases.add(release);
     this._releaseCount++;
     this._sortedReleases = semverSort.desc(
-      this.releases.map(({version}): string => version as string)
-    )
+      this.releases.map(({ version }): string => version as string),
+    );
   }
 
   getLines(): Array<string> {
     if (this.latestRelease) {
-      this.latestRelease.releaseDate = this.latestRelease.releaseDate || format(new Date(), 'yyyy-MM-dd');
+      this.latestRelease.releaseDate = this.latestRelease.releaseDate 
+        || format(new Date(), 'yyyy-MM-dd');
       this.frontManner.version = this.latestRelease.version as string;
       this.frontManner.release = this.latestRelease.releaseDate as string;
     }
 
     const releaseLines = [];
-    for (let version of this._sortedReleases) {
+    for (const version of this._sortedReleases) {
       const release = this.getRelease(version);
       if (!release) {
         continue;
       }
 
       release.pkgName = this.frontManner.pkgName as string;
-      releaseLines.push(release.toString().split('\n'))
+      releaseLines.push(release.toString().split('\n'));
     }
 
     return cleanLines([
@@ -90,7 +91,7 @@ export class Markdown  {
           '---',
           '',
           ...lines,
-        ]
+        ],
       ).flat(),
     ]);
   }
