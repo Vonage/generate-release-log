@@ -7,9 +7,11 @@ import { Release } from './classes/release';
 import * as fs from 'fs';
 
 export async function run(): Promise<void> {
-  core.info('Updating relase');
+  core.info('Updating release');
   try {
-    const releaseFile: string = core.getInput('release-file')
+    const inputFile: string = core.getInput('input-file');
+    core.debug(`File from workflow [${inputFile}]`);
+    const releaseFile: string = inputFile
       || resolve(process.cwd(), './RELEASES.md');
 
     core.debug(`Reading file ${releaseFile}`);
