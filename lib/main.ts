@@ -16,6 +16,12 @@ export async function run(): Promise<void> {
 
     core.debug(`Reading file ${releaseFile}`);
 
+    if (!fs.existsSync(releaseFile)) {
+      core.info(`File ${releaseFile} does not exist`);
+      core.info(`Please create a ${releaseFile} file in the root of your project`);
+      return;
+    }
+
     const markdown = await parseReleaseLog(releaseFile);
 
     const { release: githubRelease } = github.context.payload as ReleaseEvent;
